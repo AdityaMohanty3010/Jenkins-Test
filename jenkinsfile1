@@ -1,0 +1,42 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Git Checkout') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/AdityaMohanty3010/spring-petclinic-k8.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+stage('mail') {
+    steps {
+        mail(
+            to: 'adityamohanty3010@gmail.com',
+            cc: '2230228@kiit.ac.in',
+            bcc: '2230264@kiit.ac.in',
+            subject: "Build #${env.BUILD_NUMBER} Completed",
+            body: """
+Hello,
+
+The Jenkins build has completed successfully.
+
+Job Name   : ${env.JOB_NAME}
+Build No   : ${env.BUILD_NUMBER}
+Build URL  : ${env.BUILD_URL}
+
+Regards,
+Aditya
+"""
+        )
+    }
+}
+
+    }
+
+}

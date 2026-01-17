@@ -2,10 +2,10 @@ pipeline {
     agent any
 
     stages {
-        stage('Git Checkout') {
+        stage('Git-Checkout') {
             steps {
-                git branch: 'main',
-                    url: 'https://github.com/AdityaMohanty3010/spring-petclinic-k8.git'
+                git branch: 'main', 
+                url: 'https://github.com/AdityaMohanty3010/spring-petclinic-k8.git'
             }
         }
 
